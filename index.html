@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="./css/base.css">
+	<link rel="stylesheet" href="./css/nprogress.css">
+</head>
+
+<body>
+	<div class="container">
+		<nav class="navbar navbar-default" id="nav">
+		</nav>
+
+		<div class="content">
+			<h4>最新文章</h4>
+			<div class="artlist" id="artlist">
+			</div>
+		</div>
+		<button type="button" class="btn btn-block" id="loadmore">查看更多</button>
+		<hr>
+
+		<div class="footer" style="text-align:center;font-size: 14px; color: #999;margin:10px 0;">
+			首页 | 主站 | GitHub | created at 2020/02/4 | Powered by zyl
+		</div>
+	</div>
+</body>
+<script src="./js/jquery.js"></script>
+<script src="./bootstrap/js/bootstrap.min.js"></script>
+<script src="./js/axios.min.js"></script>
+<script src="./util/request.js"></script>
+<script src="./js/nprogress.js"></script>
+<script src="./js/moment.min.js"></script>
+<script src="./js/layer/layer.js"></script>
+<script src="./js/common.js"></script>
+<script>
+	let page = 1;
+	let limit = 5;
+
+	// 初始化文章
+	initArt();
+
+	$('#loadmore').on('click', function () {
+		page++;
+		initArt();
+	});
+</script>
+
+</html>

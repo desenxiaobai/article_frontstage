@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./css/base.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default" id="nav">
+        </nav>
+        <div style="text-align:center;" id="detailcontent">
+        </div>
+        <hr>
+        <div class="footer" style="text-align:center;font-size: 14px; color: #999;margin:10px 0;">
+            首页 | 主站 | GitHub | Powered by hexo | Theme xoxo
+        </div>
+    </div>
+</body>
+<script src="./js/jquery.js"></script>
+<script src="./bootstrap/js/bootstrap.min.js"></script>
+<script src="./js/axios.min.js"></script>
+<script src="./util/request.js"></script>
+<script src="./js/nprogress.js"></script>
+<script src="./js/moment.min.js"></script>
+<script src="./js/common.js"></script>
+<script>
+    let { art_id } = getquerystr();
+
+    // 初始化文章内容
+    initArtContent();
+
+    async function initArtContent() {
+        let data = await axios.get('/artcontent/' + art_id);
+        let { cate_id, cate_name, art_title, added_time, like, content } = data;
+        added_time = data_format(added_time, 'YYYY-MM-DD');
+        let htmlstr = `<div class="crumbs" style="text-align:left;">
+                当前位置：<a href="/">首页</a> / 
+                <a href="/cate.html?cate_id=${cate_id}">${cate_name}</a> / ${art_title}
+            </div>
+            <h3>${art_title}</h3>
+            <div style="font-size: 14px; color: #999;"> ${added_time} / 
+                分类：${cate_name} / 点赞：${like} <span class="label label-default">HTML</span> <span class="label label-default">JS</span>
+            </div>
+            <div class="content" style="margin: 20px 0;">${content}</div>`;
+        $('#detailcontent').html(htmlstr);
+    }
+</script>
+
+</html>
